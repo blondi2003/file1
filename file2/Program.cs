@@ -3,7 +3,7 @@ using System.Text.Encodings;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 
-    var path = "Table.xlsx";
+    var path = "table.csv";
     //Регистрация провайдера кодировок
     Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
     //регистрация кодировки  для поддержки кириллицы
@@ -27,7 +27,7 @@ for (int i = 1; i < lines.Length; i++)
 var result = "result.csv";
 using (StreamWriter streamWriter = new StreamWriter(result, false, encoding))
 {
-    streamWriter.WriteLine($"Name;Height;Weight;Coef");
+    streamWriter.WriteLine($"Name;Age;Experience;Wage;Coef;Premium");
     for (int i = 0; i < workers.Length; i++)
     {
         streamWriter.WriteLine(workers[i].ToExcel());
@@ -61,7 +61,7 @@ public class Worker
 
     public double Заработная_плата { get; set; }
 
-    public double Соотношение_опыта_работы_и_заработной_платы { get => Заработная_плата * Опыт_работы; }
+    public double Соотношение_опыта_работы_и_заработной_платы { get => Заработная_плата / Опыт_работы; }
     public double Премия_сотрудника { get => (Опыт_работы * Заработная_плата)/100; }
     public override string ToString()
     {
